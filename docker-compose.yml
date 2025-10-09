@@ -1,0 +1,34 @@
+services:
+    mariadb:
+        image: mariadb:11.4.8-noble
+        container_name: db-peluqueria
+        restart: unless-stopped
+        env_file:
+            - .mariadb.env
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./db:/var/lib/mysql
+            - ./seed.sql:/docker-entrypoint-initdb.d/seed.sql
+
+    phpmyadmin:
+        image: phpmyadmin:5.2.2-apache
+        container_name: phpmyadmin-peluqueria
+        restart: unless-stopped
+        env_file:
+            - .phpmyadmin.env
+        ports:
+            - "8080:80"
+        depends_on:
+            - mariadb
+
+    api:
+        build: api/.
+        container_name: api-peluqueria
+        restart: unless-stopped
+        env_file:
+            - .mariadb.env
+        ports:
+            - "5000:5000"
+        depends_on:
+            - mariadb
