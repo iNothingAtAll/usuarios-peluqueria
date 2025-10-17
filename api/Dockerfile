@@ -10,6 +10,10 @@ WORKDIR /app
 COPY . .
 
 
+# Dependencias la instalacion de los requerimientos 
+RUN apk add build-base
+
+
 # Instala las dependencias
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
