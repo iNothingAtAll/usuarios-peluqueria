@@ -33,7 +33,6 @@ class Usuario(db.Model):
             'apellido': self.apellido,
             'email': self.email,
             'telefono': self.telefono,
-            'rol': self.rol.nombre if self.rol else None,
         }
 
 
