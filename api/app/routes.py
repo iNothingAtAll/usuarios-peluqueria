@@ -25,21 +25,21 @@ def register_routes(app):
 
 
     # Devuelte todos los usuarios
-    @app.route('/api/usuarios', methods=['GET'])
+    @app.route('/api/historial/usuarios', methods=['GET'])
     def listar_usuarios():
         usuarios = Usuario.query.all()
-        return jsonify([usuario.to_dict() for usuario in usuarios])
+        return jsonify([usuario.to_dict() for usuario in usuarios]), 200
 
 
     # Devuelte todos los usuarios por id
-    @app.route('/api/usuarios/<int:usuario_id>', methods=['GET'])
+    @app.route('/api/historial/usuarios/<int:usuario_id>', methods=['GET'])
     def obtener_usuario(usuario_id):
         usuario = Usuario.query.get_or_404(usuario_id)
-        return jsonify(usuario.to_dict())
+        return jsonify(usuario.to_dict()), 200
 
 
     # Devuelte todos las citas
-    @app.route('/api/citas', methods=['GET'])
+    @app.route('/api/historial/citas', methods=['GET'])
     def listar_citas():
         citas = Cita.query.all()
-        return jsonify([cita.to_dict() for cita in citas])
+        return jsonify([cita.to_dict() for cita in citas]), 200

@@ -5,23 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-# Tabla de roles
-class Rol(db.Model):
-
-
-    # Especifico el nombre de la tabla
-    __tablename__ = 'roles_usuario'
-
-
-    # Defino los valores que tiene la tabla
-    id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(50), unique=True, nullable=False)
-
-
-    # Defino las relaciones entre tablas
-    usuarios = db.relationship('Usuario', backref='rol', lazy=True)
-
-
 # Tabla de usuarios
 class Usuario(db.Model):
 
@@ -36,10 +19,6 @@ class Usuario(db.Model):
     apellido = db.Column(db.String(100))
     email = db.Column(db.String(100), unique=True, nullable=False)
     telefono = db.Column(db.String(20))
-    password_hash = db.Column(db.String(255), nullable=False)
-    fecha_registro = db.Column(db.DateTime, server_default=db.func.now())
-    activo = db.Column(db.Boolean, default=True)
-    rol_id = db.Column(db.Integer, db.ForeignKey('roles_usuario.id'), nullable=False)
 
     # Defino las relaciones entre tablas
     citas_como_cliente = db.relationship('Cita', foreign_keys='Cita.cliente_id', backref='cliente', lazy=True)
