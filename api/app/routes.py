@@ -32,7 +32,7 @@ def register_routes(app):
 
 
     # Devuelte todos los usuarios por id
-    @app.route('/api/historial/usuarios/<int:usuario_id>', methods=['GET'])
+    @app.route('/api/historial/usuario/<int:usuario_id>', methods=['GET'])
     def obtener_usuario(usuario_id):
         usuario = Usuario.query.get_or_404(usuario_id)
         return jsonify(usuario.to_dict()), 200
