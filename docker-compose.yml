@@ -1,7 +1,7 @@
 services:
     mariadb:
         image: mariadb:11.4.8-noble
-        container_name: db-peluqueria
+        container_name: db-historial-peluqueria
         restart: unless-stopped
         env_file:
             - .mariadb.env
@@ -13,7 +13,7 @@ services:
 
     phpmyadmin:
         image: phpmyadmin:5.2.2-apache
-        container_name: phpmyadmin-peluqueria
+        container_name: phpmyadmin-historial-peluqueria
         restart: unless-stopped
         env_file:
             - .phpmyadmin.env
@@ -24,7 +24,7 @@ services:
 
     api:
         build: api/.
-        container_name: api-peluqueria
+        container_name: api-historial-peluqueria
         restart: unless-stopped
         env_file:
             - .mariadb.env
